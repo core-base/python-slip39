@@ -9,7 +9,6 @@ import logging
 import math
 import os
 import pytest
-import random
 import secrets
 import multiprocessing
 
@@ -29,7 +28,7 @@ groups_example			= dict( one = (1,1), two = (1,1), fam = (2,4), fren = (3,5) )
 
 
 def noise( mag ):
-    return mag * ( random.random() * 2 - 1 )
+    return mag * ( secrets.SystemRandom().random() * 2 - 1 )
 
 
 @substitute( shamir_mnemonic.shamir, 'RANDOM_BYTES', nonrandom_bytes )
@@ -990,8 +989,7 @@ def test_rngs_entropy( detailed=False ):
 
     def rng_py( n ):
         return rng_py.R.randbytes( n )
-    rng_py.R			= random.Random(
-        os.urandom( 32 )
+    rng_py.R			= secrets.SystemRandom().Random(os.urandom( 32 )
     )
 
     def rng_hash( n ):
