@@ -3,7 +3,7 @@ import hashlib
 import logging
 import sys
 import json
-import random
+import secrets
 
 # Optionally, we can provide ChaCha20Poly1305 to support securing the channel.  Required if the
 # --en/decrypt option is used.
@@ -260,7 +260,7 @@ def accountgroups_output(
     if corrupt:
         fraction		= corrupt / 100
         output			= ''.join(
-            random.choice( 'abcdefghijklmnopqrstuvwxyz0123456789' ) if random.random() < fraction else c
+            secrets.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789' ) if secrets.SystemRandom().random() < fraction else c
             for c in output
         )
 
