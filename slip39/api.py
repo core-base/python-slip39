@@ -934,11 +934,10 @@ def create(
             passphrase	= passphrase,
         )
         log.info(
-            f"SLIP-39 for {name} from {len(master_secret)*8}-bit Entropy using BIP-39 Mnemonic" + (
+            "%s%s", f"SLIP-39 for {name} from {len(master_secret)*8}-bit Entropy using BIP-39 Mnemonic", (
                 f": {bip39_mnem:.10}... (w/ BIP-39 Passphrase: {passphrase!r:.2}..."  # WARNING: Reveals partial Secret!
                 if log.isEnabledFor( logging.DEBUG ) else ""
-            )
-        )
+            ))
         accts			= list( accountgroups(
             master_secret	= bip39_seed,
             cryptopaths		= cryptopaths,
@@ -949,11 +948,10 @@ def create(
         # For SLIP-39, accounts are generated directly from supplied Entropy, and passphrase
         # encrypts the SLIP-39 Mnemonics, below.
         log.info(
-            f"SLIP-39 for {name} from {len(master_secret)*8}-bit Entropy directly" + (
+            "%s%s", f"SLIP-39 for {name} from {len(master_secret)*8}-bit Entropy directly", (
                 f": {codecs.encode( master_secret, 'hex_codec' ).decode( 'ascii' ):.10}... (w/ SLIP-39 Passphrase: {passphrase!r:.2}..."  # WARNING: Reveals partial Secret!
                 if log.isEnabledFor( logging.DEBUG ) else ""
-            )
-        )
+            ))
         accts			= list( accountgroups(
             master_secret	= master_secret,
             cryptopaths		= cryptopaths,

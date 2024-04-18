@@ -466,7 +466,7 @@ def mnemonic_continuation( lines ):
             continue
         mnemonic.append( mnem.strip() )
         continuation		= pref and ( pref[-1] in MNEM_CONT )
-        log.debug( f"Prefix: {pref!r:10}, Phrase: {mnem!r}" + ( "..." if continuation else "" ))
+        log.debug( "%s%s", f"Prefix: {pref!r:10}, Phrase: {mnem!r}", ( "..." if continuation else "" ))
         if continuation:
             continue
         if mnemonic:

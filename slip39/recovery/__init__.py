@@ -83,14 +83,13 @@ def recover(
             # No recovery; raise the Exception produced by original attempt w/ all mnemonics
             raise exc
     log.info(
-        f"Recovered {len(secret)*8}-bit SLIP-39 Seed Entropy with {len(combo)}"
+        "%s%s", f"Recovered {len(secret)*8}-bit SLIP-39 Seed Entropy with {len(combo)}"
         f" ({'all' if len(combo) == len(mnemonics) else ', '.join( ordinal(i+1) for i in combo)})"
-        f" of {len(mnemonics)} supplied mnemonics" + (
+        f" of {len(mnemonics)} supplied mnemonics", (
             f"; Seed decoded from SLIP-39 (w/ no passphrase) and generated using BIP-39 Mnemonic representation w/ {'a' if passphrase else 'no'} passphrase"
             if using_bip39 else
             f"; Seed decoded from SLIP-39 Mnemonics w/ {'a' if passphrase else 'no'} passphrase"
-        )
-    )
+        ))
     if using_bip39:
         secret			= recover_bip39(
             mnemonic	= produce_bip39( entropy=secret ),
