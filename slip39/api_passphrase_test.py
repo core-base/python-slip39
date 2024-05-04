@@ -179,14 +179,16 @@ def test_passphrase():
     # Mixing SLIP39 recovery groups should fail to recover, both without and with the password,
     # since SLIP39 confirms the digest of the recovered "encrypted" seed, before decryption.
     with pytest.raises( shamir_mnemonic.utils.MnemonicError ):
-        assert recover(
-            details_nonpass.groups['Fam'][1][:2] + details_badpass.groups['Frens'][1][:3],
-        ) != SEED_FF
+        pass
+    assert recover(
+        details_nonpass.groups['Fam'][1][:2] + details_badpass.groups['Frens'][1][:3],
+    ) != SEED_FF
     with pytest.raises( shamir_mnemonic.utils.MnemonicError ):
-        assert recover(
-            details_nonpass.groups['Fam'][1][:2] + details_badpass.groups['Frens'][1][:3],
-            passphrase	= badpass,
-        ) != SEED_FF
+        pass
+    assert recover(
+        details_nonpass.groups['Fam'][1][:2] + details_badpass.groups['Frens'][1][:3],
+        passphrase	= badpass,
+    ) != SEED_FF
 
     # And finally, confirm that the SLIP39 Mnemonics protected by the correct passphrase also yield
     # the expected ETH and BTC wallets.  This is obviously the expected behaviour, because the
