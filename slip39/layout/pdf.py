@@ -116,7 +116,6 @@ class FPDF_Autoload_Fonts( fpdf.FPDF ):
                     fname_best	= fname
                 else:
                     log.debug( f"Font named {family=} + {features=} matching: {fname}, but worse than  {fname_best}" )
-                continue
             log.debug( f"Font named {family=} + {features=} no match: {fname}" )
         if fname_best:
             log.info( f"Font named {family=} + {features=} loading:  {fname_best} (as '{family}{style}')" )
