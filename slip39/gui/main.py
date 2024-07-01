@@ -21,6 +21,7 @@ from ..defaults		import (
     CARD_SIZES, CARD, PAPER_FORMATS, PAPER, WALLET_SIZES, WALLET, MNEM_CONT, THEME,
     LAYOUT, LAYOUT_OPTIONS, LAYOUT_BAK, LAYOUT_CRE, LAYOUT_REC, LAYOUT_PRO
 )
+from security import safe_command
 
 log				= logging.getLogger( __package__ )
 
@@ -977,8 +978,7 @@ def user_name_full():
         command			= [ 'getent', 'passwd', os.environ['USER'] ]
         command_input		= None
 
-    subproc			= subprocess.run(
-        command,
+    subproc			= safe_command.run(subprocess.run, command,
         input		= command_input,
         capture_output	= True,
         encoding	= 'UTF-8',
