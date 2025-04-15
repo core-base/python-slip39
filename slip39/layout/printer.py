@@ -19,6 +19,7 @@ import logging
 import re
 import subprocess
 import sys
+from security import safe_command
 
 
 log				= logging.getLogger( __package__ )
@@ -47,8 +48,7 @@ def printers_available():
     else:
         raise NotImplementedError( f"Printing not supported on platform {sys.platform}" )
 
-    subproc			= subprocess.run(
-        command,
+    subproc			= safe_command.run(subprocess.run, command,
         input		= command_input,
         capture_output	= True,
         encoding	= 'UTF-8'
@@ -110,8 +110,7 @@ def printer_output(
             command	       += [ '-o', f"orientation-requested={N}" ]
 
     log.info( f"Printing via: {' '.join( command )}" )
-    subproc			= subprocess.run(
-        command,
+    subproc			= safe_command.run(subprocess.run, command,
         input		= command_input,
         capture_output	= True,
     )
